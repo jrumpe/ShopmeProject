@@ -10,7 +10,6 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.test.annotation.Rollback;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
@@ -41,6 +40,7 @@ class UserRepositoryTest {
 
         userRavi.addRole(roleEditor);
         userRavi.addRole(roleAssistant);
+        userRavi.setEnabled(true);
 
         User savedUser = repo.save(userRavi);
 

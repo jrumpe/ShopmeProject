@@ -22,7 +22,7 @@ public class User {
     @Column(name = "first_name", length = 45, nullable = false)
     private String firstname;
 
-    @Column(name = "last_name", length = 45, nullable = false, unique = true)
+    @Column(name = "last_name", length = 45, nullable = false)
     private String lastname;
 
     @Column(length = 64)
@@ -40,9 +40,11 @@ public class User {
         this.lastname = lastname;
     }
 
-    @OneToMany
-    @JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns =
-    @JoinColumn(name = "role_id"))
+    //        inverseJoinColumns = @JoinColumn(name = "role_id")
+    @ManyToMany
+    @JoinTable(name = "users_roles",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
 
     public Integer getId () {

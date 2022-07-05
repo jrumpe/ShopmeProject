@@ -1,7 +1,7 @@
+
 package com.shopme.common.entity;
 
 import javax.persistence.*;
-import java.util.Objects;
 
 @Entity
 @Table(name = "roles")

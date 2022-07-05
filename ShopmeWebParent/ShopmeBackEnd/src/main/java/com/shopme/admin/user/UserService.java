@@ -28,7 +28,6 @@ public class UserService {
     public List<Role> listRoles () {
         return (List<Role>) roleRepo.findAll();
     }
-
     public void save (User user) {
         encodePassword(user);
         userRepo.save(user);
