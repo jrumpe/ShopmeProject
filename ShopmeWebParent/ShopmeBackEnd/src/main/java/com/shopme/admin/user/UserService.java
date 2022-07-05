@@ -28,8 +28,20 @@ public class UserService {
     public List<Role> listRoles () {
         return (List<Role>) roleRepo.findAll();
     }
+
     public void save (User user) {
-        encodePassword(user);
+        boolean isUpdatingUser = (user.getId() != null);
+
+        if (isUpdatingUser) {
+            User existingUser = userRepo.findById(user.getId()).get();
+
+            if (user.getPassword().isEmpty()) {
+                user.setPassword(existingUser.getPassword());
+            } else {
+                encodePassword(user);
+            }
+            encodePassword(user);
+        }
         userRepo.save(user);
     }
 
@@ -38,16 +50,28 @@ public class UserService {
         user.setPassword(encodedPassword);
     }
 
-    public boolean isEmailUnique (String email) {
+    public boolean isEmailUnique (Integer id, String email) {
         User userByEMail = userRepo.getUserByEmail(email);
 
-        return userByEMail == null;
+        if (userByEMail == null) return true;
+
+        boolean isCreateNew = (id == null);
+
+        if (isCreateNew) {
+            if (userByEMail != null) return false;
+        } else {
+            if (userByEMail.getId() != id) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     public User get (Integer id) throws UserNotFoundException {
-        try{
+        try {
             return userRepo.findById(id).get();
-        } catch (NoSuchElementException ex){
+        } catch (NoSuchElementException ex) {
             throw new UserNotFoundException("Could not find any User with ID " + id);
         }
     }
