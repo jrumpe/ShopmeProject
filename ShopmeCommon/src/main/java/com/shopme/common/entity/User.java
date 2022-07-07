@@ -42,9 +42,8 @@ public class User {
 
     //        inverseJoinColumns = @JoinColumn(name = "role_id")
     @ManyToMany
-    @JoinTable(name = "users_roles",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    @JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns =
+    @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
 
     public Integer getId () {
@@ -118,5 +117,11 @@ public class User {
     @Override
     public String toString () {
         return "User{" + "id=" + id + ", email='" + email + '\'' + ", firstname='" + firstname + '\'' + ", lastname" + "='" + lastname + '\'' + ", roles=" + roles + '}';
+    }
+
+    @Transient
+    public String getPhotosImagePath () {
+        if (id == null || photos == null) return "/images/default-user.png";
+        return "/user-photos/" + this.id + "/" + this.photos;
     }
 }
