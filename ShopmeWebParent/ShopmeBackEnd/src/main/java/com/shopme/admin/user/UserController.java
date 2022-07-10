@@ -25,13 +25,6 @@ public class UserController {
     @Autowired
     private UserService service;
 
-/*    @GetMapping("/users")
-    public String listAll (Model model) {
-        List<User> listUsers = service.listAll();
-        model.addAttribute("listUsers", listUsers);
-        return "users";
-    }*/
-
     @GetMapping("/users")
     public String listFirstPage (Model model) {
         return listByPage(1, model, "firstname", "asc", null);
@@ -43,14 +36,6 @@ public class UserController {
     ) String keyword) {
         Page<User> page = service.listByPage(pageNum, sortField, sortDir, keyword);
         List<User> listUsers = page.getContent();
-
-//        System.out.println("Pagenum = " + pageNum);
-//        System.out.println("Total Elements = " + page.getTotalElements());
-//        System.out.println("Total Pages = " + page.getTotalPages());
-
-        System.out.println("Sort Field:  " + sortField);
-        System.out.println("Sort Order:  " + sortDir);
-
 
         long startCount = (pageNum - 1) * UserService.USERS_PER_PAGE + 1;
         long endCount = startCount + UserService.USERS_PER_PAGE - 1;
@@ -66,9 +51,7 @@ public class UserController {
         model.addAttribute("startCount", startCount);
         model.addAttribute("endCount", endCount);
         model.addAttribute("totalItems", page.getTotalElements());
-//        model.addAttribute("totalItems", 0);
         model.addAttribute("listUsers", listUsers);
-//        model.addAttribute("listUsers", new ArrayList<User>());
         model.addAttribute("sortField", sortField);
         model.addAttribute("sortDir", sortDir);
         model.addAttribute("reverseSortDir", reverseSortDir);
@@ -113,7 +96,14 @@ public class UserController {
         }
 
         redirectAttributes.addFlashAttribute("message", "The User has been created successfully");
-        return "redirect:/users";
+
+        return getRedirectURLtoAffectedUser(user);
+
+    }
+
+    private String getRedirectURLtoAffectedUser (User user) {
+        String firstPartOfEmail = user.getEmail().split("@")[0];
+        return "redirect:/users/page/1?sortField=id&sortDir=asc&keyword=" + firstPartOfEmail;
     }
 
     @GetMapping("/users/edit/{id}")
