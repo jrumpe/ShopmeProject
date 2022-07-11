@@ -41,7 +41,7 @@ public class User {
     }
 
     //        inverseJoinColumns = @JoinColumn(name = "role_id")
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns =
     @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
@@ -126,7 +126,7 @@ public class User {
     }
 
     @Transient
-    public String getFullName(){
+    public String getFullName () {
         return firstname + " " + lastname;
-     }
+    }
 }
