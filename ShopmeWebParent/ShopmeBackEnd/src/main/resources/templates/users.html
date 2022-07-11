@@ -1,74 +1,16 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org/" xmlns="http://www.w3.org/1999/html">
-
-<head>
-    <meta http-equiv="Content-Type" content="text/html" ; charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
-    <title>Home - Shopme Admin</title>
-
-    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}"/>
-    <link rel="stylesheet" type="text/css" th:href="@{/fontawesome/all.css}"/>
-    <link rel="stylesheet" type="text/css" th:href="@{/style.css}"/>
-
-    <script type="text/javascript" th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
-    <script type="text/javascript" th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
-</head>
+<head th:replace="fragments :: page_head('Users - Shopme Admin')"></head>
 <body>
 <div class="container-fluid">
 
-    <nav class="navbar navbar-expand-lg bg-dark navbar-dark">
-        <a class="navbar-brand" th:href="@{/}">
-            <img th:src="@{/images/ShopmeAdminSmall.png}"/>
-        </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#topNavbar">
-            <span class="navbar-toggle-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="topNavbar">
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link" th:href="@{/users}">Users</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" th:href="@{/categories}">Categories</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" th:href="@{/brands}">Brands</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" th:href="@{/products}">Products</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" th:href="@{/customers}">Customers</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" th:href="@{/shipping}">Shipping</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" th:href="@{/orders}">Orders</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" th:href="@{/report}">Sales Report</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" th:href="@{/articles}">Articles</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" th:href="@{/menus}">Menus</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" th:href="@{/settings}">Settings</a>
-                </li>
-            </ul>
-        </div>
-    </nav>
+    <div th:replace="navigation :: menu"></div>
+
     <div>
         <h2>Manage Users</h2>
         <a th:href="@{/users/new}" class="fas fa-user-plus fa-2x icon-dark mr-2"></a>
-
         <a th:href="@{/users/export/csv}" class="fas fa-file-csv fa-2x icon-dark mr-2"></a>
-
         <a th:href="@{/users/export/excel}" class="fas fa-file-excel fa-2x icon-dark mr-2"></a>
-
         <a th:href="@{/users/export/pdf}" class="fas fa-file-pdf fa-2x icon-dark mr-2"></a>
     </div>
 
@@ -91,10 +33,8 @@
                 <i class="fas fa-eraser"></i>
             </button>
             &nbsp; &nbsp;
-
         </form>
     </div>
-
     <div class="full-details">
         <table class="table table-bordered table-striped table-hover table-responsive-xl">
             <thead class="thead-dark">
@@ -102,13 +42,10 @@
                 <th class="hideable-column">
                 <th th:replace="fragments :: column_link('id', 'User ID', 'tag')"/>
                 </th>
-
                 <th>Photos</th>
-
                 <th class="hideable-column">
                 <th th:replace="fragments :: column_link('email', 'E-Mail', 'tag')"/>
                 </th>
-
                 <th th:replace="fragments :: column_link('firstname', 'First Name', 'none')"></th>
 
                 <th th:replace="fragments :: column_link('lastname', 'Last Name', 'none')"></th>
@@ -248,30 +185,8 @@
         </div>
     </div>
 
-    <div class="text-center">
-        <p>Shopme Control Panel - Copyright &copy; Shopme</p>
-    </div>
+    <div th:replace="fragments :: footer"></div>
 
 </div>
-
-<script type="text/javascript">
-    $(document).ready(function () {
-        $(".link-delete").on("click", function (e) {
-            e.preventDefault();
-            // alert($(this).attr("href"));
-            link = $(this);
-            userId = link.attr("userId");
-            $("#yesButton").attr("href", link.attr("href"));
-            $("#confirmText").text("Are you sure you want to delete this user ID " + userId + "?");
-            $("#confirmModal").modal();
-
-        });
-    });
-
-    function clearFilter() {
-        window.location = "[[@{/users}]]";
-    }
-</script>
-
 </body>
 </html>
