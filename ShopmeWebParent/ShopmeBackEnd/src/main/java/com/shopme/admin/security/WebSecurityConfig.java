@@ -41,7 +41,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure (HttpSecurity http) throws Exception {
-        http.authorizeRequests().anyRequest().authenticated().and().formLogin().loginPage("/login").usernameParameter("email").permitAll().and().logout().permitAll().and().rememberMe().key("abcDefgHijKlmnOpqrs_1234567890").tokenValiditySeconds(7 * 24 * 60 * 60);
+        http.authorizeRequests().antMatchers("/users/**").hasAnyAuthority("Admin").anyRequest().authenticated().and().formLogin().loginPage("/login").usernameParameter("email").permitAll().and().logout().permitAll().and().rememberMe().key("abcDefgHijKlmnOpqrs_1234567890").tokenValiditySeconds(7 * 24 * 60 * 60);
     }
 
     @Override
