@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="ShopmeBackEnd/Hibernate" uuid="a46e5b28-b6ec-489d-bf92-b30474ca07e1">
+    <data-source source="LOCAL" name="shopmedb@localhost" uuid="92e0637f-c2fc-4456-b140-f1c13073cf70">
       <driver-ref>mysql.8</driver-ref>
       <synchronize>true</synchronize>
-      <imported>true</imported>
-      <remarks>Hibernate</remarks>
       <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
       <jdbc-url>jdbc:mysql://localhost:3306/shopmedb</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
