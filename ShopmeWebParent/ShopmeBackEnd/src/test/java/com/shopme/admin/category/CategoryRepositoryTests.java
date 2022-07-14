@@ -32,7 +32,7 @@ public class CategoryRepositoryTests {
     public void testCreateSubCategory () {
         Category parent = new Category(7);
 
-        Category subCategory = new Category("iPhone", parent);
+        Category subCategory = new Category("Samsung", parent);
 
         Category savedCategory = repo.save(subCategory);
 

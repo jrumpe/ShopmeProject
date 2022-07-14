@@ -37,5 +37,23 @@
     [[${label}]]
 </a>
 
+<div th:fragment="category_status">
+
+    <a th:if="${cat.enabled == true}" class="fas fa-circle-check fa-2x icon-green"
+       th:href="@{'/categories/' + ${cat.id} + '/enabled/false'}" title="Disable this category">
+    </a>
+    <a th:if="${cat.enabled == false}" class="fas fa-circle fa-2x icon-dark"
+       th:href="@{'/categories/' + ${cat.id} + '/enabled/true'}" title="Enable this category">
+    </a>
+
+    <!--    [[${cat.enabled}]]-->
+</div>
+
+<div th:fragment="category_actions">
+    <a class="fas fa-edit fa-2x icon-green" title="Edit this Category"></a>
+    &nbsp;
+    <a class="fas fa-trash fa-2x icon-dark link-delete" title="Delete this Category"></a>
+</div>
+
 </body>
 </html>
