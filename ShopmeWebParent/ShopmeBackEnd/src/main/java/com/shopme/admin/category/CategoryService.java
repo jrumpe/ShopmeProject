@@ -24,13 +24,13 @@ public class CategoryService {
 
         for (Category category : categoriesInDB) {
             if (category.getParent() == null) {
-                categoriesUsedInForm.add(new Category(category.getName()));
+                categoriesUsedInForm.add(Category.copyIdAndName(category));
 
                 Set<Category> children = category.getChildren();
 
                 for (Category subCategory : children) {
                     String name = "--" + subCategory.getName();
-                    categoriesUsedInForm.add(new Category(name));
+                    categoriesUsedInForm.add(Category.copyIdAndName(subCategory.getId(), name));
 
                     listChildren(categoriesUsedInForm, subCategory, 1);
                 }
@@ -40,6 +40,10 @@ public class CategoryService {
 
 
         return categoriesUsedInForm;
+    }
+
+    public Category save (Category category) {
+        return repo.save(category);
     }
 
     public void listChildren (List<Category> categoriesUsedInForm, Category parent, int subLevel) {
@@ -56,7 +60,7 @@ public class CategoryService {
             name += subCategory.getName();
 
             System.out.println(subCategory.getName());
-            categoriesUsedInForm.add(new Category(name));
+            categoriesUsedInForm.add(Category.copyIdAndName(subCategory.getId(), name));
 
 
             listChildren(categoriesUsedInForm, subCategory, newSubLevel);
