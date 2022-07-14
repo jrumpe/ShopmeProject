@@ -7,6 +7,7 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.annotation.Rollback;
 
+import java.util.List;
 import java.util.Set;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
@@ -21,7 +22,6 @@ public class CategoryRepositoryTests {
 
     @Test
     public void testCreateRootCategory () {
-//        Category category = new Category("Computers");
         Category category = new Category("Electronics");
         Category savedCategory = repo.save(category);
 
@@ -87,5 +87,12 @@ public class CategoryRepositoryTests {
 
             printChildren(subCategory, newSubLevel);
         }
+    }
+
+    @Test
+    public void testListRootCategories () {
+        List<Category> rootCategories = repo.findRootCategories();
+        rootCategories.forEach(cat -> System.out.println(cat.getName()));
+
     }
 }
