@@ -60,7 +60,14 @@
                     <div th:replace="fragments :: category_status"></div>
                 </td>
                 <td>
-                    <div th:replace="fragments :: category_actions"></div>
+                    <a class="fas fa-edit fa-2x icon-green" th:href="@{'/categories/edit/' + ${cat.id}}"
+                       title="Edit this Category">
+                    </a>
+                    &nbsp;
+                    <a class="fas fa-trash fa-2x icon-dark link-delete" th:href="@{'/categories/delete/' + ${cat.id}}"
+                       th:categoryId="${cat.id}"
+                       title="Delete this Category">
+
                 </td>
 
             </tr>
