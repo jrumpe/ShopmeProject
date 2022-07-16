@@ -3,6 +3,7 @@ package com.shopme.admin.category;
 import com.shopme.admin.FileUploadUtil;
 import com.shopme.common.entity.Category;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
@@ -23,9 +24,18 @@ public class CategoryController {
     private CategoryService service;
 
     @GetMapping("/categories")
-    public String listAll (Model model) {
-        List<Category> listCategories = service.listAll();
+    public String listAll (@Param("sortDir") String sortDir, Model model) {
+        if (sortDir == null || sortDir.isEmpty()) {
+            sortDir = "asc";
+        }
+
+        List<Category> listCategories = service.listAll(sortDir);
+
         model.addAttribute("listCategories", listCategories);
+
+        String reverseSortDir = sortDir.equals("asc") ? "desc" : "asc";
+
+        model.addAttribute("reverseSortDir", reverseSortDir);
 
         return "categories/categories";
     }
@@ -80,31 +90,4 @@ public class CategoryController {
             return "redirect:/categories";
         }
     }
-
-/*    @GetMapping("/categories/delete/{id}")
-    public String deleteUser (@PathVariable(name = "id") Integer id, Model model,
-                              RedirectAttributes redirectAttributes) {
-        try {
-            service.delete(id);
-            redirectAttributes.addFlashAttribute("message", "The Category ID " + id + "has been deleted successfully");
-//            return "user_form";
-        } catch (CategoryNotFoundException e) {
-            redirectAttributes.addFlashAttribute("message", e.getMessage());
-        }
-        return "redirect:/categories";
-    }*/
-
-/*    @GetMapping("/categories/{id}/enabled/{status}")
-    public String updateUserEnabledStatus (@PathVariable(name = "id") Integer id,
-                                           @PathVariable("status") boolean enabled,
-                                           RedirectAttributes redirectAttributes) {
-
-        service.updateCategoryEnabledStatus(id, enabled);
-        String status = enabled ? "enabled" : "disabled";
-        String message = "The Category ID " + id + " has been " + status;
-        redirectAttributes.addFlashAttribute("message", message);
-
-        return "redirect:/categories";
-    }*/
-
 }
