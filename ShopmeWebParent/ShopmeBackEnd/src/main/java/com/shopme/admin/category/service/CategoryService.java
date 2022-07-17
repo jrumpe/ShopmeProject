@@ -15,6 +15,8 @@ public class CategoryService {
     private CategoryRepository repo;
 
     public List<Category> listAll (String sortDir) {
+
+//        TODO Function code to sort categories when toggled in ascending or descending order
         Sort sort = Sort.by("name");
 
         if (sortDir.equals("asc")) {
@@ -22,7 +24,6 @@ public class CategoryService {
         } else if (sortDir.equals("desc")) {
             sort = sort.descending();
         }
-
         List<Category> rootCategories = repo.findRootCategories(sort);
 
         return listHierarchicalCategories(rootCategories, sortDir);
@@ -37,6 +38,7 @@ public class CategoryService {
             hierarchicalCategories.add(Category.copyFull(rootCategory));
 
             Set<Category> children = sortedSubCategories(rootCategory.getChildren(), sortDir);
+//            Set<Category> children = sortedSubCategories(rootCategory.getChildren());
 
             for (Category subCategory : children) {
                 String name = "--" + subCategory.getName();
@@ -48,8 +50,7 @@ public class CategoryService {
     }
 
 
-    private void listSubHierarchicalCategories (List<Category> hierarchicalCategories, Category parent, int subLevel,
-                                                String sortDir) {
+    private void listSubHierarchicalCategories (List<Category> hierarchicalCategories, Category parent, int subLevel, String sortDir) {
 
         Set<Category> children = sortedSubCategories(parent.getChildren(), sortDir);
 
@@ -162,7 +163,7 @@ public class CategoryService {
         return sortedSubCategories(children, "asc");
     }
 
-    private SortedSet<Category> sortedSubCategories (Set<Category> children, String sortDir) {
+        private SortedSet<Category> sortedSubCategories (Set<Category> children, String sortDir) {
         SortedSet<Category> sortedChildren = new TreeSet<>(new Comparator<Category>() {
             @Override
             public int compare (Category cat1, Category cat2) {
@@ -172,7 +173,6 @@ public class CategoryService {
                     return cat2.getName().compareTo(cat1.getName());
                 }
             }
-
         });
 
         sortedChildren.addAll(children);

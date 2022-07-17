@@ -33,10 +33,9 @@ public class CategoryController {
 
         List<Category> listCategories = service.listAll(sortDir);
 
-        model.addAttribute("listCategories", listCategories);
-
         String reverseSortDir = sortDir.equals("asc") ? "desc" : "asc";
 
+        model.addAttribute("listCategories", listCategories);
         model.addAttribute("reverseSortDir", reverseSortDir);
 
         return "categories/categories";
