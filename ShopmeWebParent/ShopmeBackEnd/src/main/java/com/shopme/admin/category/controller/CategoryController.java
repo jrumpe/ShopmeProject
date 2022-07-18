@@ -53,8 +53,7 @@ public class CategoryController {
     }
 
     @PostMapping("/categories/save")
-    public String saveCategory (Category category, @RequestParam("fileImage") MultipartFile multipartFile,
-                                RedirectAttributes ra) throws IOException {
+    public String saveCategory (Category category, @RequestParam("fileImage") MultipartFile multipartFile, RedirectAttributes ra) throws IOException {
 
 
         if (!multipartFile.isEmpty()) {
@@ -90,5 +89,31 @@ public class CategoryController {
             ra.addFlashAttribute("message", ex.getMessage());
             return "redirect:/categories";
         }
+    }
+
+    @GetMapping("/categories/{id}/enabled/{status}")
+    public String updateCategoryEnabledStatus (@PathVariable(name = "id") Integer id, @PathVariable("status") Boolean enabled,
+                                               Model model, RedirectAttributes ra) {
+        service.updateCategoryEnabledStatus(id, enabled);
+        String status = enabled ? "enabled" : "disabled";
+        String message = "The Category ID " + id + " has been " + status;
+
+        ra.addFlashAttribute("message", message);
+
+        return "redirect:/categories";
+    }
+
+    @GetMapping("/categories/delete/{id}")
+    public String deleteCategory (@PathVariable(name = "id") Integer id, Model model, RedirectAttributes redirectAttributes) {
+        try {
+            service.delete(id);
+            String categoryDir = "/category-images/" + id;
+            FileUploadUtil.removeDir(categoryDir);
+
+            redirectAttributes.addFlashAttribute("message", "The Category ID " + id + " has been deleted successfully");
+        } catch (CategoryNotFoundException ex) {
+            redirectAttributes.addFlashAttribute("message", ex.getMessage());
+        }
+        return "redirect:/categories";
     }
 }

@@ -6,10 +6,12 @@ import com.shopme.common.entity.Category;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
 
 @Service
+@Transactional
 public class CategoryService {
     @Autowired
     private CategoryRepository repo;
@@ -163,7 +165,7 @@ public class CategoryService {
         return sortedSubCategories(children, "asc");
     }
 
-        private SortedSet<Category> sortedSubCategories (Set<Category> children, String sortDir) {
+    private SortedSet<Category> sortedSubCategories (Set<Category> children, String sortDir) {
         SortedSet<Category> sortedChildren = new TreeSet<>(new Comparator<Category>() {
             @Override
             public int compare (Category cat1, Category cat2) {
@@ -179,4 +181,18 @@ public class CategoryService {
 
         return sortedChildren;
     }
+
+    public void updateCategoryEnabledStatus (Integer id, boolean enabled) {
+
+        repo.updateEnabledStatus(id, enabled);
+    }
+
+    public void delete (Integer id) throws CategoryNotFoundException {
+        Long countById = repo.countById(id);
+        if (countById == null || countById == 0) {
+            throw new CategoryNotFoundException("Could not find any Category with ID " + id);
+        }
+        repo.deleteById(id);
+    }
+
 }
