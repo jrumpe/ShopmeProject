@@ -6,6 +6,19 @@
     <content url="file://$MODULE_DIR$">
       <excludeFolder url="file://$MODULE_DIR$/target" />
       <excludeFolder url="file://$MODULE_DIR$/.idea/dataSources" />
+      <excludeFolder url="file://$MODULE_DIR$/category-images/1" />
+      <excludeFolder url="file://$MODULE_DIR$/category-images/2" />
+      <excludeFolder url="file://$MODULE_DIR$/category-images/3" />
+      <excludeFolder url="file://$MODULE_DIR$/category-images/4" />
+      <excludeFolder url="file://$MODULE_DIR$/category-images/7" />
+      <excludeFolder url="file://$MODULE_DIR$/category-images/9" />
+      <excludeFolder url="file://$MODULE_DIR$/category-images/11" />
+      <excludeFolder url="file://$MODULE_DIR$/category-images/12" />
+      <excludeFolder url="file://$MODULE_DIR$/category-images/13" />
+      <excludeFolder url="file://$MODULE_DIR$/category-images/14" />
+      <excludeFolder url="file://$MODULE_DIR$/category-images/21" />
+      <excludeFolder url="file://$MODULE_DIR$/category-images/30" />
+      <excludeFolder url="file://$MODULE_DIR$/user-photos/11" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
