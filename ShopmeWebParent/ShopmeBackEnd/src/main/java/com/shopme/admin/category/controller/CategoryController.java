@@ -3,6 +3,7 @@ package com.shopme.admin.category.controller;
 import com.shopme.admin.FileUploadUtil;
 import com.shopme.admin.category.CategoryNotFoundException;
 import com.shopme.admin.category.CategoryPageInfo;
+import com.shopme.admin.category.exporter.CategoryCsvExporter;
 import com.shopme.admin.category.service.CategoryService;
 import com.shopme.common.entity.Category;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
@@ -27,8 +29,8 @@ public class CategoryController {
     private CategoryService service;
 
     @GetMapping("/categories")
-    public String listFirstPage (@Param("sortDir") String sortDir, Model model) {
-        return listByPage(1, sortDir, null, model);
+    public String listFirstPage (Model model) {
+        return listByPage(1, "asc", null, model);
     }
 
     @GetMapping("/categories/page/{pageNum}")
@@ -41,7 +43,7 @@ public class CategoryController {
         CategoryPageInfo pageInfo = new CategoryPageInfo();
         List<Category> listCategories = service.listbyPage(pageInfo, pageNum, sortDir, keyword);
 
-        long startCount = (pageNum - 1) * CategoryService.ROOT_CATEGORIES_PER_PAGE + 1;
+        long startCount = (long) (pageNum - 1) * CategoryService.ROOT_CATEGORIES_PER_PAGE + 1;
         long endCount = startCount + CategoryService.ROOT_CATEGORIES_PER_PAGE - 1;
 
         if (endCount > pageInfo.getTotalElements()) {
@@ -139,5 +141,12 @@ public class CategoryController {
             redirectAttributes.addFlashAttribute("message", ex.getMessage());
         }
         return "redirect:/categories";
+    }
+
+    @GetMapping("/categories/export/csv")
+    public void exportToCsv (HttpServletResponse response) throws IOException {
+        List<Category> listCategories = service.listCategoriesUsedInForm();
+        CategoryCsvExporter exporter = new CategoryCsvExporter();
+        exporter.export(listCategories, response);
     }
 }

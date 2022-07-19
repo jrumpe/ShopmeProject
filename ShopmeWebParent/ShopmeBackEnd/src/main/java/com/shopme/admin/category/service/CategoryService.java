@@ -26,8 +26,9 @@ public class CategoryService {
 //        TODO Function code to sort categories when toggled in ascending or descending order
 
         Sort sort = Sort.by("name");
-
-        if (sortDir.equals("asc")) {
+        if (sortDir == null || sortDir.isEmpty()) {
+            sort = sort.ascending();
+        } else if (sortDir.equals("asc")) {
             sort = sort.ascending();
         } else if (sortDir.equals("desc")) {
             sort = sort.descending();
@@ -198,10 +199,14 @@ public class CategoryService {
         SortedSet<Category> sortedChildren = new TreeSet<>(new Comparator<Category>() {
             @Override
             public int compare (Category cat1, Category cat2) {
-                if (sortDir.equals("asc")) {
+                if (sortDir == null || sortDir.isEmpty()) {
                     return cat1.getName().compareTo(cat2.getName());
                 } else {
-                    return cat2.getName().compareTo(cat1.getName());
+                    if (sortDir.equals("asc")) {
+                        return cat1.getName().compareTo(cat2.getName());
+                    } else {
+                        return cat2.getName().compareTo(cat1.getName());
+                    }
                 }
             }
         });
