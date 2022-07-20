@@ -17,4 +17,5 @@ public class CategoryRestController {
 
         return service.checkUnique(id, name, alias);
     }
+
 }

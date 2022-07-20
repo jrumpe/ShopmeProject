@@ -12,7 +12,7 @@
         <a th:href="@{/brands/export/csv}" class="fas fa-file-csv fa-2x icon-dark mr-2"></a>
     </div>
 
-        <div th:replace="fragments :: search_form_and_message('/brands/page/1')"></div>
+    <div th:replace="fragments :: search_form_and_message('/brands/page/1')"></div>
 
     <div class="full-details">
         <table class="table table-bordered table-striped table-hover table-responsive-xl">
@@ -31,7 +31,7 @@
             <tr th:each="brand :  ${listBrands}">
                 <td>[[${brand.id}]]</td>
                 <td>
-<!--                    <div th:replace="fragments :: user_photos"></div>-->
+                    <img th:src="@{${brand.logoPath}}" style="width: 100px" class="img-fluid"/>
                 </td>
                 <td>[[${brand.name}]]</td>
                 <td>
@@ -43,13 +43,13 @@
                 <td>
                     <div th:replace="fragments :: edit('brand', '/brands/edit/' + ${brand.id})"></div>
                     &nbsp;&nbsp;
-                    <div th:replace="fragments :: delete('brand', ${brand.id}, '/brands/delete' + ${brand.id}, true)"></div>
+                    <div th:replace="fragments :: delete('brand', ${brand.id}, '/brands/delete/' + ${brand.id}, true)"></div>
                 </td>
             </tr>
             </tbody>
         </table>
     </div>
-<!--    <div th:replace="fragments :: pagination('/users', 'users')"></div>-->
+    <!--    <div th:replace="fragments :: pagination('/users', 'users')"></div>-->
 
     <div th:replace="modal_fragments :: confirm_modal"></div>
 

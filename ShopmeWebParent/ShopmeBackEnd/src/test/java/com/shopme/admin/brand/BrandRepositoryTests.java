@@ -56,7 +56,7 @@ public class BrandRepositoryTests {
     @Test
     public void testCreateBrandWithTwoCategories () {
 
-        Brand brand = new Brand("Canon", "brand-logo.png");
+        Brand brand = new Brand("Canon", "canon.png");
 
         Category camPhoto = new Category(2);
         Category digCam = new Category(10);
