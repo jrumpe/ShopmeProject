@@ -147,7 +147,7 @@ public class CategoryService {
 
             name += subCategory.getName();
 
-            System.out.println(subCategory.getName());
+//            System.out.println(subCategory.getName());
             categoriesUsedInForm.add(Category.copyIdAndName(subCategory.getId(), name));
 
 
