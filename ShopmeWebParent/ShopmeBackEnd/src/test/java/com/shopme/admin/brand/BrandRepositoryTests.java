@@ -103,4 +103,5 @@ public class BrandRepositoryTests {
         Integer id = 4;
         repo.deleteById(id);
     }
+
 }

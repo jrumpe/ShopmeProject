@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org/"
+>
+
+<body>
+
+<div th:fragment="header_menu">
+
+    <nav class="navbar navbar-expand-lg bg-dark navbar-dark">
+        <a class="navbar-brand" th:href="@{/}">
+            <img th:src="@{/images/ShopmeAdminSmall.png}"/>
+        </a>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#topNavbar">
+            <span class="navbar-toggle-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="topNavbar">
+            <ul class="navbar-nav">
+
+                <li class="nav-item"><a class="nav-link" href="@{/careers}">Careers</a></li>
+                <li class="nav-item"><a class="nav-link" href="@{/careers}">Payments</a></li>
+                <li class="nav-item"><a class="nav-link" href="@{/careers}">Shipping &amp; Deliveries</a></li>
+                <li class="nav-item"><a class="nav-link" href="@{/careers}">Login</a></li>
+                <li class="nav-item"><a class="nav-link" href="@{/careers}">Register</a></li>
+                <li class="nav-item"><a class="nav-link" href="@{/careers}">Contact</a></li>
+
+            </ul>
+        </div>
+    </nav>
+</div>
+
+</body>
+</html>
