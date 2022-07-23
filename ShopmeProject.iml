@@ -4,7 +4,6 @@
     <output url="file://$MODULE_DIR$/target/classes" />
     <output-test url="file://$MODULE_DIR$/target/test-classes" />
     <content url="file://$MODULE_DIR$">
-      <excludeFolder url="file://$MODULE_DIR$/target" />
       <excludeFolder url="file://$MODULE_DIR$/.idea/dataSources" />
       <excludeFolder url="file://$MODULE_DIR$/category-images/1" />
       <excludeFolder url="file://$MODULE_DIR$/category-images/2" />
@@ -19,6 +18,7 @@
       <excludeFolder url="file://$MODULE_DIR$/category-images/21" />
       <excludeFolder url="file://$MODULE_DIR$/category-images/30" />
       <excludeFolder url="file://$MODULE_DIR$/user-photos/11" />
+      <excludeFolder url="file://$MODULE_DIR$/target" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

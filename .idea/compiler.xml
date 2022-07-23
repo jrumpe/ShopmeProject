@@ -7,8 +7,8 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="ShopmeCommon" />
-        <module name="ShopmeBackEnd" />
         <module name="ShopmeFrontEnd" />
+        <module name="ShopmeBackEnd" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
